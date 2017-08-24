@@ -2,12 +2,22 @@
     <div class="yui-register">
         <h3>惊觉相思不露</h3>
         <form class="yui-form">
-            <y-input v-model="nickname" :is_option="1" label="姓名"></y-input>
+            <y-input v-model="nickname" :is_option="1" placeholder="昵称"></y-input>
 
-            <y-input v-model="password" type="password" label="密码" :is_option="1"></y-input>
+            <y-input v-model="password" type="password" placeholder="密码" :is_option="1" @keydown.enter="submit"></y-input>
+
+            <!--<y-radio v-model="sex2" label="南"></y-radio>-->
+            <y-radios v-model="sex" class="yui-form-item">
+                <y-radio label="name"></y-radio>
+                <y-radio label="sex"></y-radio>
+            </y-radios>
+            <!--<y-upload></y-upload>-->
+
         </form>
 
-        <y-button @click="submit" type="primary">注册</y-button>
+        <div style="margin: 16px 24px;">
+            <y-button @click="submit" type="primary">注册</y-button>
+        </div>
     </div>
 </template>
 <script>
@@ -18,13 +28,15 @@
             return {
                 nickname: '',
                 password: '',
+                sex: '',
+                sex2: false
             }
         },
         methods: {
             submit () {
-                console.log(1243);
+                const _this = this;
                 if (this.nickname === '' || this.password === '') {
-                    this.$Message.error('错误');
+                    this.$Message.warning('请完善内容');
                     return;
                 }
                 let pramas = {
@@ -32,8 +44,13 @@
                     password: this.password,
                 };
                 ajaxQuery('register', pramas , function () {
-                    location.href = '/login';
-                })
+                    _this.$Message.success('注册成功');
+                    setTimeout(() => {
+                        location.href = '/login';
+                    }, 1000);
+                }, function () {
+                    _this.$Message.error('用户已存在');
+                });
             }
         },
         props: [],

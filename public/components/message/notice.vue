@@ -1,9 +1,9 @@
 <template>
-    <div class="yui-cover">
-        <div class="yui-message">
-            <div v-html="content"></div>
+    <transition :name="transitionName">
+        <div :class="baseClass" :style="styles">
+            <div :class="[baseClass + '-content' ]" v-html="content"></div>
         </div>
-    </div>
+    </transition>
 </template>
 <script>
     export default {
@@ -38,8 +38,31 @@
             }
         },
         props: {
-            content: ''
+            content: '',
+            onClose: {
+                type: Function,
+                default: function () {
+                    
+                }
+            },
+            duration: {
+                type: Number
+            },
+            name: {
+                type: String,
+                required: true
+            },
+            prefixCls: {},
+            transitionName: {},
+            styles: {}
         },
-        components: {}
+        components: {},
+        computed: {
+            baseClass () {
+                return [
+                    `${this.prefixCls}-base`
+                ];
+            }
+        }
     }
 </script>

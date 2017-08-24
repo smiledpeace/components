@@ -1,0 +1,84 @@
+@select: ~'@{css-prefix}-select';
+@select-input: ~'@{select}-input';
+@select-wrapper: ~'@{select}-wrapper';
+@select-ul: ~'@{select}-ul';
+@select-ul-item: ~'@{select-ul}-item';
+.@{select-wrapper} {
+    width: 240px;
+    position: relative;
+    .@{select} {
+        position: relative;
+        &:before {
+            content: ' ';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-image: linear-gradient(45deg, #fff 45%, #333);
+            display: inline-block;
+            right: 6px;
+            top: 11px;
+            transform: rotate(45deg);
+            transition: all .3s ease-in-out;
+            will-change: top;
+            // transform-origin: 0 0;
+        }
+        &-active {
+            .@{select-input} {
+                box-shadow: 0 0 2px 2px rgba(173, 70, 191, .1);
+                border: 1px solid rgba(173, 70, 191, .3)
+            }
+            &:before {
+                transform: rotate(135deg);
+                top: 9px;
+            }
+        }
+    }
+    .@{select-input} {
+        width: 100%;
+        outline: none;
+        margin: 0;
+        border: 1px solid @link-color;
+        cursor: pointer;
+        border-radius: 3px;
+        padding: 0 10px;
+        transition: all .3s ease-in;
+        height: 30px;
+        line-height: 30px;
+        box-sizing: border-box;
+        &:hover {
+            border-color: rgba(173, 70, 191, .3);
+        }
+    }
+}
+
+.@{select-ul} {
+    box-sizing: border-box;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, .1);
+    background-color: @fff;
+    max-height: 240px;
+    overflow-x: hidden;
+    overflow-y: overlay;
+    border-radius: 5px;
+    position: absolute;
+    top: 36px;
+    width: 100%;
+    padding-bottom: 5px;
+    z-index: 1;
+    &-item {
+        padding: 6px 15px;
+        font-size: 14px;
+        cursor: pointer;
+        line-height: 1;
+        &:hover {
+            background-color: #ededed;
+        }
+        &-active {
+            background-color: @css-like;
+            color: @fff;
+            &:hover {
+                background-color: @css-like;
+            }
+        }
+
+    }
+}

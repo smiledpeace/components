@@ -1,18 +1,16 @@
 <template>
     <div class="yui-register">
-        <div>
-            <label for="nickname">昵称</label> <input type="text" v-model="nickname" id="nickname">
-        </div>
-        <div>
-            <label for="pwd">密码</label> <input type="password" v-model="password" id="pwd">
-        </div>
+        <h3>原来只因已入骨</h3>
+        <form class="yui-form">
+            <y-input v-model="nickname" :is_option="1" placeholder="昵称"></y-input>
 
-        <button @click="submit">保存</button>
+            <y-input v-model="password" type="password" placeholder="密码" :is_option="1" @keydown.enter="submit"></y-input>
+        </form>
+        <div style="margin: 16px 24px;">
+            <y-button @click="submit" type="primary">登录</y-button>
+        </div>
     </div>
 </template>
-<style lang="less" rel="stylesheet/less" scoped>
-
-</style>
 <script>
     export default {
         mounted() {
@@ -26,15 +24,20 @@
         methods: {
             submit () {
                 if (this.nickname === '' || this.password === '') {
+                    this.$Message.warning('请完善内容');
                     return;
                 }
                 let pramas = {
                     nickname: this.nickname,
                     password: this.password,
                 };
-                ajaxQuery('login', pramas , function (res) {
-                    console.log(2312);
-                    location.href = '/index';
+                ajaxQuery('login', pramas , (res) => {
+                    this.$Message.success('登录成功');
+                    setTimeout(() => {
+                        location.href = '/index';
+                    }, 1000);
+                }, res => {
+                    this.$Message.error(res.msg);
                 })
             }
         },

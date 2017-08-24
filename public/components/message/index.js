@@ -2,18 +2,29 @@ import Notification from  './notification';
 
 const prefixCls = 'yui-message';
 
-let defaultDuration = 1.5, top, messageInstance, name = 1;
+const prefixKey = 'yui-message-key-';
+
+const iconTypes = {
+    'success': 'icon-chenggong',
+    'warning': 'icon-jinggao',
+    'error': 'icon-icon-31',
+};
+
+let defaultDuration = 1, top, messageInstance, name = 1;
 
 function getMessageInstance() {
     messageInstance = messageInstance || Notification.newInstance({
         prefixCls: prefixCls,
-        style: {
-            top: `${top}px`
+        styles: {
+            top: `${top}px`,
         }
-    })
+    });
+
+    return messageInstance;
 }
 
 function notice(content= '', duration = defaultDuration, type, onClose = function () {}, closable = false) {
+    let iconType = iconTypes[type];
     let instance = getMessageInstance();
 
     instance.notice({
@@ -21,11 +32,10 @@ function notice(content= '', duration = defaultDuration, type, onClose = functio
         duration: duration,
         styles: {},
         transitionName: 'move-up',
-        content: `
-            <div class="${prefixCls}-custom-content ${prefixCls}-${type}">
-                <span>${content}</span>
-            </div>
-        `,
+        content: `<div class="${prefixCls}-content">
+            <i class="${prefixCls}-${type} iconfont ${iconType}"></i>
+            <span class="${prefixCls}-span">${content}</span>
+        </div>`,
         onClose: onClose,
         closable: closable,
         type: 'message'
@@ -100,6 +110,6 @@ export default {
     destroy () {
         let instance = getMessageInstance();
         messageInstance = null;
-        instance.destroy('ivu-message');
+        instance.destroy('yui-message');
     }
 };

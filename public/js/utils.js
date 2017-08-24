@@ -1,25 +1,25 @@
-const ajaxQuery = function (method, params, sucCB, unsucCB) {
-    let noLoading = params.noLoading, queryNum = 0;
+const ajaxQuery = function(method, params, sucCB, unsucCB) {
+    let noLoading = params.noLoading,
+        queryNum = 0;
     if (params.noLoading) {
-        delete  params.noLoading;
+        delete params.noLoading;
     } else {
-        // $('#loading').show();
         queryNum += 1;
+        window.YVue.$Loading.showLoading();
     }
     $.ajax({
         type: 'POST',
         url: '/query/' + method,
         data: params,
         dataType: 'json',
-        success: function (res) {
+        success: function(res) {
             if (!noLoading) {
                 queryNum -= 1;
-                if(!queryNum) {
-                    $('#loading').hide();
+                if (!queryNum) {
+                    window.YVue.$Loading.hideLoading();
                 }
             }
-            console.log(res);
-            var resultJson=res;
+            var resultJson = res;
             if (resultJson.refresh) {
                 window.location.reload();
                 return false;
@@ -29,7 +29,6 @@ const ajaxQuery = function (method, params, sucCB, unsucCB) {
                 return false;
             }
             if (resultJson.result.toUpperCase() == 'TRUE') {
-                console.log(41231);
                 if (typeof sucCB !== "undefined" && sucCB !== null) {
                     sucCB(resultJson);
                 } else {
@@ -43,10 +42,10 @@ const ajaxQuery = function (method, params, sucCB, unsucCB) {
                 }
             }
         },
-        error: function () {
+        error: function() {
             if (!noLoading) {
                 queryNum -= 1;
-                if(!queryNum) {
+                if (!queryNum) {
                     $('#loading').hide();
                 }
             }
@@ -54,3 +53,34 @@ const ajaxQuery = function (method, params, sucCB, unsucCB) {
         }
     });
 };
+/**
+ * 对象的深度复制
+ * @param obj
+ * @returns {{}}
+ */
+const objectDepthCopy = function(obj) {
+    var temp = null;
+    if (obj && !(obj instanceof Array)) {
+        temp = {};
+        for (var item in obj) {
+            if (obj[item] && typeof obj[item] == 'object') {
+                //if(item == '')
+                temp[item] = objectDepthCopy(obj[item]);
+            } else {
+                temp[item] = obj[item];
+            }
+        }
+    } else {
+        temp = [];
+        if (obj) {
+            for (var i = 0, _i = obj.length; i < _i; i++) {
+                if (obj[i] && typeof obj[i] == 'object') {
+                    temp[i] = objectDepthCopy(obj[i]);
+                } else {
+                    temp[i] = obj[i];
+                }
+            }
+        }
+    }
+    return temp;
+}

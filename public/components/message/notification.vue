@@ -1,16 +1,30 @@
 <template>
-    <div >
+    <div class="yui-cover">
         <Notice
                 v-for="notice in notices"
                 :key="notice.name"
-                :content="notice.content">
+                :content="notice.content"
+                :duration="notice.duration"
+                :name="notice.name"
+                :on-close="notice.onClose"
+                :prefix-cls="prefixCls"
+                :transition-name="notice.transitionName"
+                :styles="styles">
         </Notice>
     </div>
 </template>
 <style lang="less" rel="stylesheet/less" scoped>
 </style>
 <script>
-    import Notice from './notice.vue'
+    import Notice from './notice.vue';
+    let seed = 0;
+
+    const now = Date.now();
+
+    function getUuid () {
+        return 'yui-message-key-' + now + '-' + (seed++);
+    }
+
     export default {
         mounted() {
         },
@@ -32,7 +46,6 @@
                     closable: false,
                     name: name
                 }, notice);
-
                 this.notices.push(_notice);
             },
             close (name) {
@@ -43,12 +56,21 @@
                         break;
                     }
                 }
+
+                this.$nextTick(() => {
+                    if (document.querySelector('.yui-cover')) {
+                        document.querySelector('.yui-cover').style.height = '0';
+                    }
+                })
             },
             closeAll () {
                 this.notices = [];
             }
         },
-        props: [],
+        props: {
+            prefixCls: {},
+            styles: {}
+        },
         components: {
             Notice
         }

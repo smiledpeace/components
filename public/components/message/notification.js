@@ -1,4 +1,4 @@
-import Notice from './notice.vue';
+import Notice from './notification.vue';
 import Vue from 'vue';
 
 Notice.newInstance = properties => {
@@ -11,7 +11,6 @@ Notice.newInstance = properties => {
             })
         }
     });
-
     const component = Instance.$mount();
     document.body.appendChild(component.$el);
     const notification = Instance.$children[0];

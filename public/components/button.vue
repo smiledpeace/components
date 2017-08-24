@@ -1,5 +1,5 @@
 <template>
-    <button :class="classes" @click="handleClick">
+    <button :class="classes" @click="handleClick" >
         <span><slot></slot></span>
     </button>
 </template>
@@ -14,7 +14,7 @@
         methods: {
             handleClick (event) {
                 this.$emit('click', event);
-            }
+            },
         },
         props: {
             type: {
