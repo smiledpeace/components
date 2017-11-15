@@ -16,12 +16,20 @@
 import {
     mapGetters
 } from 'vuex';
+
+import viewUtils from '../js/viewUtils.js'
 export default {
     mounted() {
         this.init();
         let params = {
             company_id: '12312'
         };
+        viewUtils.each({name: 'Tom', age: 1}, (item, key) => {
+            console.log(item);
+        })
+        let obj = viewUtils.extend({}, {name: 'Tom', age: 1})
+        console.log(obj);
+        console.log(viewUtils);
     },
     data() {
         return {

@@ -42,7 +42,7 @@ router.post('/getAllList', function (reqRouter, resRouter) {
         });
         res.on('end', function () {
             var decodedBody = '';
-            if (url === pageUrl) {
+            if (url) {
                 decodedBody = iconv.decode(Buffer.concat(chunks), 'utf-8');
             }else {
                 decodedBody = iconv.decode(Buffer.concat(chunks), 'gbk');
@@ -51,7 +51,7 @@ router.post('/getAllList', function (reqRouter, resRouter) {
 
         })
     })
-    function callBack(html,reqRouter, resRouter) {
+    function callBack(html, reqRouter, resRouter) {
         //使用load方法，参数是刚才获取的html源代码数据
         var $ = cheerio.load(html, {decodeEntities: false});
         if (url === pageUrl) {
