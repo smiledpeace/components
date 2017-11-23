@@ -6,7 +6,8 @@ var router = express.Router();
 const maps = {
     'login' : '登录',
     'register' : '注册',
-    'index': '首页'
+    'index': '首页',
+    'filp': '翻页'
 };
 
 router.get('/', function(req, res) {

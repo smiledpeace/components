@@ -1,0 +1,51 @@
+@filp-prefix: ~'@{css-prefix}-filp';
+
+.@{filp-prefix} {
+    height: 100%;
+    position: relative;
+    & > div {
+        display: table;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        position: absolute;
+        z-index: 0;
+        will-change: transform;
+        // display: none;
+        span {
+            display: table-cell;
+            vertical-align: middle;
+            font-size: 28px;
+        }
+        &.one {
+            background: #35f;
+            z-index: 2;
+        }
+        &.two {
+            background: #f39;
+            z-index: 1;
+        }
+        &.three {
+            background: #908;
+            z-index: 0
+        }
+        &.leave {
+            display: none;
+            z-index: 0;
+        }
+        &.active {
+            z-index: 2;
+            // display: table;
+        }
+    }
+}
+// @keyframes flip {
+//     from {
+//
+//     }
+//     to {
+//
+//     }
+// }

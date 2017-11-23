@@ -11452,6 +11452,10 @@ var _content = __webpack_require__(71);
 
 var _content2 = _interopRequireDefault(_content);
 
+var _filp = __webpack_require__(74);
+
+var _filp2 = _interopRequireDefault(_filp);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_components2.default);
@@ -11464,7 +11468,8 @@ new _vue2.default({
         index: _index2.default,
         register: _register2.default,
         login: _login2.default,
-        aritcle: _content2.default
+        aritcle: _content2.default,
+        filp: _filp2.default
     },
     created: function created() {
         window.YVue = this;
@@ -13511,6 +13516,9 @@ var Component = normalizeComponent(
             }, res => {
                 location.href = `/aritcle/${res.data}`;
             });
+        },
+        goFilp() {
+            location.href = `/filp`;
         }
     },
     props: [],
@@ -13904,7 +13912,16 @@ exports.default = utils;
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "yui-editor"
-  }, [_c('ul', {
+  }, [_c('button', {
+    staticClass: "yui-button",
+    attrs: {
+      "type": "button",
+      "name": "button"
+    },
+    on: {
+      "click": _vm.goFilp
+    }
+  }, [_vm._v("Go To Filp")]), _vm._v(" "), _c('ul', {
     staticClass: "editor_ul"
   }, _vm._l((_vm.notes), function(item) {
     return _c('li', [_c('a', {
@@ -14314,6 +14331,286 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
   }, [_vm._v(_vm._s(_vm.items.title))]), _vm._v(" "), ((_vm.items.content instanceof Array)) ? _vm._l((_vm.items.content), function(content) {
     return _c('p', [_vm._v(_vm._s(content.content))])
   }) : _c('p', [_vm._v("\n        " + _vm._s(_vm.items.content) + "\n    ")])], 2)
+}
+var staticRenderFns = []
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+
+/***/ }),
+/* 74 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_filp_vue__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_32fbfd30_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_filp_vue__ = __webpack_require__(79);
+var normalizeComponent = __webpack_require__(0)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_filp_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_32fbfd30_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_filp_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+
+/* harmony default export */ __webpack_exports__["default"] = (Component.exports);
+
+
+/***/ }),
+/* 75 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_flipPages_index_vue__ = __webpack_require__(76);
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    components: {
+        filp: __WEBPACK_IMPORTED_MODULE_0__components_flipPages_index_vue__["a" /* default */]
+    }
+});
+
+/***/ }),
+/* 76 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e22148fe_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(78);
+var normalizeComponent = __webpack_require__(0)
+/* script */
+
+/* template */
+
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_index_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_e22148fe_hasScoped_false_node_modules_vue_loader_lib_selector_type_template_index_0_index_vue__["a" /* default */],
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 77 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+// import
+const getCss = function (o, key) {
+    return o.currentStyle ? o.currentStyle[key] : document.defaultView.getComputedStyle(o, false)[key];
+};
+const MaxLength = parseInt(getCss(document.querySelector('#app'), 'height'));
+/* harmony default export */ __webpack_exports__["a"] = ({
+    mounted() {
+        let slice = Array.prototype.slice;
+        this.$nextTick(() => {
+            this.allPages = slice.call(document.querySelectorAll('.page'));
+            this.allPages.forEach((item, index, arr) => {
+                item['next'] = arr[index + 1];
+                item['prev'] = arr[index - 1];
+                item['cur'] = item;
+            });
+            this.currentPage = this.allPages[0];
+            console.log(this.allPages);
+        });
+        this.maxLenght = MaxLength / 3;
+        this.lastLength = MaxLength - this.maxLenght;
+    },
+    data() {
+        return {
+            maxLenght: 0,
+            lastLength: 0,
+            startDistanceY: 0,
+            endDistanceY: 0,
+            gap: 0,
+            currentPage: '',
+            activepage: '',
+            allPages: ''
+        };
+    },
+    methods: {
+        startFun(evt) {
+            let touches = evt.touches[0];
+            this.startDistanceY = touches.pageY;
+        },
+        hasClass(el, className) {
+            return el.classList.contains(className);
+        },
+        removeClass(el, className) {
+            el.classList.remove(className);
+        },
+        addClass(el, className) {
+            el.classList.add(className);
+        },
+        moveFun(evt) {
+            let touches = evt.touches[0];
+            this.endDistanceY = touches.pageY;
+            let gap = this.endDistanceY - this.startDistanceY;
+            let prev = this.currentPage.prev,
+                next = this.currentPage.next;
+            console.log(gap);
+            //gap < 0 往上滑
+            //gap > 0 往下滑
+            if (gap > 0 && prev) {
+                // 往下滑
+                // if (this.hasClass(prev, 'leave')) {
+                //     this.removeClass(prev, 'leave');
+                // }
+                console.log(this.currentPage);
+                if (this.hasClass(prev, 'leave')) {
+                    this.removeClass(prev, 'leave');
+                    // this.addClass(this.currentPage, 'active')
+                }
+                prev.style.transform = `translate3d(0, ${gap - MaxLength}px, 0)`;
+                this.currentPage.style.transform = `translate3d(0, ${gap}px, 0)`;
+            } else {
+                this.currentPage.style.transform = `translate3d(0, ${gap}px, 0)`;
+            }
+        },
+        endFun(evt) {
+            this.renderFun(this.endDistanceY - this.startDistanceY);
+        },
+        renderFun(gap) {
+            //gap < 0 往上滑
+            //gap > 0 往下滑
+            this.currentPage.style.transition = "transform .3s ease";
+            if (this.currentPage.prev) {
+                this.currentPage.prev.style.transition = "transform .3s ease";
+            }
+
+            if (gap < 0) {
+                this.activepage = this.currentPage.next ? this.currentPage.next : this.currentPage;
+                if (Math.abs(gap) > this.maxLenght) {
+                    if (this.currentPage.next) {
+                        this.currentPage.style.transform = `translate3d(0, -100%, 0)`;
+                    } else {
+                        this.currentPage.style.transform = `translate3d(0, 0, 0)`;
+                    }
+                    setTimeout(() => {
+                        this.currentPage.style = '';
+                        if (this.currentPage.next) {
+                            this.currentPage.className += " leave";
+                        }
+                        this.currentPage = this.activepage;
+                    }, 300);
+                } else {
+                    this.currentPage.style.transform = `translate3d(0, 0, 0)`;
+                    setTimeout(() => {
+                        this.currentPage.style = '';
+                    }, 300);
+                }
+            } else if (gap > 0) {
+                this.activepage = this.currentPage.prev ? this.currentPage.prev : this.currentPage;
+                if (Math.abs(gap) > this.maxLenght) {
+                    if (this.currentPage.prev) {
+                        this.currentPage.prev.style.transform = `translate3d(0, 0, 0)`;
+                    } else {
+                        this.currentPage.style.transform = `translate3d(0, 0 , 0)`;
+                    }
+                    setTimeout(() => {
+                        this.currentPage.style = '';
+                        if (this.currentPage.prev) {
+                            if (this.hasClass(this.currentPage, 'active')) {
+                                this.removeClass(this.currentPage, 'active');
+                            }
+                            this.currentPage.className += " leave";
+                        }
+                        this.currentPage = this.activepage;
+                    }, 300);
+                } else {
+                    this.currentPage.style.transform = `translate3d(0, 0 , 0)`;
+                    if (this.currentPage.prev) {
+                        this.currentPage.prev.style.transform = `translate3d(0, -100% , 0)`;
+                        this.currentPage.prev.className += " leave";
+                    }
+                    setTimeout(() => {
+                        this.currentPage.style = '';
+                        if (this.currentPage.prev) {
+                            this.currentPage.prev.style = '';
+                        }
+                    }, 300);
+                }
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 78 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "yui-filp",
+    on: {
+      "touchstart": _vm.startFun,
+      "touchmove": _vm.moveFun,
+      "touchend": _vm.endFun
+    }
+  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])
+}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "page one"
+  }, [_c('span', [_vm._v("1")])])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "page two"
+  }, [_c('span', [_vm._v("2")])])
+},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "page three"
+  }, [_c('span', [_vm._v("3")])])
+}]
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+
+/***/ }),
+/* 79 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('filp')
 }
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
