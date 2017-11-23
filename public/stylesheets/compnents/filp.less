@@ -13,7 +13,7 @@
         position: absolute;
         z-index: 0;
         will-change: transform;
-        // display: none;
+        display: none;
         span {
             display: table-cell;
             vertical-align: middle;
@@ -37,7 +37,15 @@
         }
         &.active {
             z-index: 2;
-            // display: table;
+            display: table;
+        }
+        &.current {
+            z-index: 3;
+            display: table;
+        }
+        &.down-acrive {
+            z-index: 4;
+            display: table;
         }
     }
 }

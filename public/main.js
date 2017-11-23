@@ -8,7 +8,6 @@ import register from './views/register.vue';
 import login from './views/login.vue';
 import aritcle from './views/content.vue';
 import filp from './views/filp.vue';
-
 new Vue({
     el: '#app',
     data: {
