@@ -1,6 +1,10 @@
 <template lang="html">
     <div class="yui-filp" ref="flip" v-scroll @touchstart="startFun" @touchmove="moveFun" @touchend="endFun">
-        <div class="page one" >
+        <div class="page" v-for="(item, index) in contents">
+            <h3 v-if="item.title"></h3>
+            <p v-for="content in item">{{ content.content }}</p>
+        </div>
+        <!-- <div class="page one" >
             <span >1</span>
         </div>
         <div class="page two" >
@@ -8,7 +12,7 @@
         </div>
         <div class="page three">
             <span >3</span>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -17,9 +21,9 @@
     const getCss = function (o, key) {
         return o.currentStyle ? o.currentStyle[key] : document.defaultView.getComputedStyle(o, false)[key];
     }
-    const MaxLength = parseInt(getCss(document.querySelector('#app'), 'height'));
+    const MaxLength = parseInt(getCss(document.querySelector('#app'), 'width'));
     export default {
-        mounted() {
+        beforeUpdate() {
             let slice = Array.prototype.slice;
             this.$nextTick(() => {
                 this.allPages = slice.call(document.querySelectorAll('.page'));
@@ -36,7 +40,7 @@
         },
         data() {
             return {
-                maxLenght: 120,
+                maxLenght: 30,
                 lastLength: 0,
                 startDistanceY: 0,
                 endDistanceY: 0,
@@ -56,6 +60,9 @@
                 return;
             }
         },
+        props: {
+            contents: Array
+        },
         methods: {
             checkClassName(el, className, forAdd = true) {
                 if (!el) return;
@@ -70,7 +77,7 @@
             startFun(evt) {
                 TimerManager.makeInstance(this.$refs.flip);
                 let touches = evt.touches[0];
-                this.startDistanceY = touches.pageY;
+                this.startDistanceY = touches.pageX;
             },
             hasClass(el, className) {
                 return el.classList.contains(className)
@@ -83,7 +90,7 @@
             },
             moveFun(evt) {
                 let touches = evt.touches[0];
-                this.endDistanceY = touches.pageY;
+                this.endDistanceY = touches.pageX;
                 let gap = this.endDistanceY - this.startDistanceY;
                 let prev = this.currentPage.prev, next = this.currentPage.next;
                 //gap < 0 往上滑
@@ -93,11 +100,11 @@
                 if (gap > 0 && prev) { // 往下滑
                     // debugger
                     this.checkClassName(prev, 'down-acrive');
-                    prev.style.transform = `translate3d(0, ${gap - MaxLength}px, 0)`
-                    this.currentPage.style.transform = `translate3d(0, ${gap}px, 0)`;
+                    prev.style.transform = `translate3d(${gap - MaxLength}px, 0,  0)`
+                    this.currentPage.style.transform = `translate3d(${gap}px, 0,  0)`;
                 }else if (gap < 0 && next){
                     this.checkClassName(next, 'active');
-                    this.currentPage.style.transform = `translate3d(0, ${gap}px, 0)`;
+                    this.currentPage.style.transform = `translate3d(${gap}px, 0,  0)`;
                 }
             },
             endFun(evt) {
@@ -125,7 +132,7 @@
                     this.activepage = this.currentPage.next ? this.currentPage.next : this.currentPage;
                     if (Math.abs(gap) > this.maxLenght) {
                         if (this.currentPage.next) {
-                            this.currentPage.style.transform = `translate3d(0, -100%, 0)`
+                            this.currentPage.style.transform = `translate3d( -100%, 0, 0)`
                         }else {
                             this.currentPage.style.transform = `translate3d(0, 0, 0)`;
                         }
@@ -174,7 +181,7 @@
                     }else {
                         this.currentPage.style.transform = `translate3d(0, 0 , 0)`;
                         if (this.currentPage.prev) {
-                            this.currentPage.prev.style.transform = `translate3d(0, -100% , 0)`;
+                            this.currentPage.prev.style.transform = `translate3d( -100% ,0, 0)`;
                         }
                         setTimeout(() => {
                             this.currentPage.style = '';

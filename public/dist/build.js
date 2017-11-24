@@ -14281,6 +14281,8 @@ var Component = normalizeComponent(
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_flipPages_index_vue__ = __webpack_require__(76);
+//
 //
 //
 //
@@ -14294,6 +14296,7 @@ var Component = normalizeComponent(
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["a"] = ({
     created() {
         let id = document.querySelector('#param1').value;
@@ -14301,7 +14304,7 @@ var Component = normalizeComponent(
     },
     data() {
         return {
-            items: ''
+            items: []
         };
     },
     methods: {
@@ -14309,11 +14312,29 @@ var Component = normalizeComponent(
             ajaxQuery('getAritcle', { art_id: id }, res => {
                 res.data.content = JSON.parse(decodeURIComponent(res.data.content));
                 document.title = res.data.title;
-                this.items = res.data;
-                // console.log(this.items.content.toString());
-                console.log(this.items.content);
+                let tempArr = res.data.content,
+                    lastArr;
+                lastArr = tempArr.splice(0, tempArr.length - tempArr.length % 19);
+                while (lastArr.length) {
+                    this.items.push(lastArr.splice(0, 19));
+                }
+                this.items[0].title = res.data.title;
+                this.items.push(tempArr);
+                console.log(JSON.parse(JSON.stringify(this.items)));
             });
+        },
+        gcd(a, b = 2) {
+            // if ( a % b != 0 ) {
+            //     b++;
+            //     this.gcd(a, b);
+            // }else {
+            //     return b;
+            // }
+
         }
+    },
+    components: {
+        filp: __WEBPACK_IMPORTED_MODULE_0__components_flipPages_index_vue__["a" /* default */]
     }
 });
 
@@ -14325,11 +14346,11 @@ var Component = normalizeComponent(
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "yui-article"
-  }, [_c('h3', {
-    staticClass: "title"
-  }, [_vm._v(_vm._s(_vm.items.title))]), _vm._v(" "), ((_vm.items.content instanceof Array)) ? _vm._l((_vm.items.content), function(content) {
-    return _c('p', [_vm._v(_vm._s(content.content))])
-  }) : _c('p', [_vm._v("\n        " + _vm._s(_vm.items.content) + "\n    ")])], 2)
+  }, [_c('filp', {
+    attrs: {
+      "contents": _vm.items
+    }
+  })], 1)
 }
 var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
@@ -14431,14 +14452,18 @@ var Component = normalizeComponent(
 //
 //
 //
+//
+//
+//
+//
 
 // import
 const getCss = function (o, key) {
     return o.currentStyle ? o.currentStyle[key] : document.defaultView.getComputedStyle(o, false)[key];
 };
-const MaxLength = parseInt(getCss(document.querySelector('#app'), 'height'));
+const MaxLength = parseInt(getCss(document.querySelector('#app'), 'width'));
 /* harmony default export */ __webpack_exports__["a"] = ({
-    mounted() {
+    beforeUpdate() {
         let slice = Array.prototype.slice;
         this.$nextTick(() => {
             this.allPages = slice.call(document.querySelectorAll('.page'));
@@ -14455,7 +14480,7 @@ const MaxLength = parseInt(getCss(document.querySelector('#app'), 'height'));
     },
     data() {
         return {
-            maxLenght: 120,
+            maxLenght: 30,
             lastLength: 0,
             startDistanceY: 0,
             endDistanceY: 0,
@@ -14475,6 +14500,9 @@ const MaxLength = parseInt(getCss(document.querySelector('#app'), 'height'));
             return;
         }
     },
+    props: {
+        contents: Array
+    },
     methods: {
         checkClassName(el, className, forAdd = true) {
             if (!el) return;
@@ -14489,7 +14517,7 @@ const MaxLength = parseInt(getCss(document.querySelector('#app'), 'height'));
         startFun(evt) {
             TimerManager.makeInstance(this.$refs.flip);
             let touches = evt.touches[0];
-            this.startDistanceY = touches.pageY;
+            this.startDistanceY = touches.pageX;
         },
         hasClass(el, className) {
             return el.classList.contains(className);
@@ -14502,7 +14530,7 @@ const MaxLength = parseInt(getCss(document.querySelector('#app'), 'height'));
         },
         moveFun(evt) {
             let touches = evt.touches[0];
-            this.endDistanceY = touches.pageY;
+            this.endDistanceY = touches.pageX;
             let gap = this.endDistanceY - this.startDistanceY;
             let prev = this.currentPage.prev,
                 next = this.currentPage.next;
@@ -14514,11 +14542,11 @@ const MaxLength = parseInt(getCss(document.querySelector('#app'), 'height'));
                 // 往下滑
                 // debugger
                 this.checkClassName(prev, 'down-acrive');
-                prev.style.transform = `translate3d(0, ${gap - MaxLength}px, 0)`;
-                this.currentPage.style.transform = `translate3d(0, ${gap}px, 0)`;
+                prev.style.transform = `translate3d(${gap - MaxLength}px, 0,  0)`;
+                this.currentPage.style.transform = `translate3d(${gap}px, 0,  0)`;
             } else if (gap < 0 && next) {
                 this.checkClassName(next, 'active');
-                this.currentPage.style.transform = `translate3d(0, ${gap}px, 0)`;
+                this.currentPage.style.transform = `translate3d(${gap}px, 0,  0)`;
             }
         },
         endFun(evt) {
@@ -14546,7 +14574,7 @@ const MaxLength = parseInt(getCss(document.querySelector('#app'), 'height'));
                 this.activepage = this.currentPage.next ? this.currentPage.next : this.currentPage;
                 if (Math.abs(gap) > this.maxLenght) {
                     if (this.currentPage.next) {
-                        this.currentPage.style.transform = `translate3d(0, -100%, 0)`;
+                        this.currentPage.style.transform = `translate3d( -100%, 0, 0)`;
                     } else {
                         this.currentPage.style.transform = `translate3d(0, 0, 0)`;
                     }
@@ -14595,7 +14623,7 @@ const MaxLength = parseInt(getCss(document.querySelector('#app'), 'height'));
                 } else {
                     this.currentPage.style.transform = `translate3d(0, 0 , 0)`;
                     if (this.currentPage.prev) {
-                        this.currentPage.prev.style.transform = `translate3d(0, -100% , 0)`;
+                        this.currentPage.prev.style.transform = `translate3d( -100% ,0, 0)`;
                     }
                     setTimeout(() => {
                         this.currentPage.style = '';
@@ -14628,21 +14656,15 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "touchmove": _vm.moveFun,
       "touchend": _vm.endFun
     }
-  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])
+  }, _vm._l((_vm.contents), function(item, index) {
+    return _c('div', {
+      staticClass: "page"
+    }, [(item.title) ? _c('h3') : _vm._e(), _vm._v(" "), _vm._l((item), function(content) {
+      return _c('p', [_vm._v(_vm._s(content.content))])
+    })], 2)
+  }))
 }
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "page one"
-  }, [_c('span', [_vm._v("1")])])
-},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "page two"
-  }, [_c('span', [_vm._v("2")])])
-},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "page three"
-  }, [_c('span', [_vm._v("3")])])
-}]
+var staticRenderFns = []
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
 

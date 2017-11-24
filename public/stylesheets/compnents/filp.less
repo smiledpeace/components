@@ -7,13 +7,20 @@
         display: table;
         height: 100%;
         width: 100%;
-        text-align: center;
         color: #fff;
         font-weight: bold;
         position: absolute;
         z-index: 0;
         will-change: transform;
         display: none;
+        background: #669;
+        padding: 16px;
+        &:last-child {
+            p:last-child {
+                text-align: right;
+                margin-top: 10px;
+            }
+        }
         span {
             display: table-cell;
             vertical-align: middle;
