@@ -1,5 +1,5 @@
 <template >
-    <div class="yui-article">
+    <div style="height: 100%; background: #669;">
         <!-- <h3 class="title">{{ items.title }}</h3>
         <template v-if="(items.content instanceof Array)">
             <p v-for="content in items.content" >{{ content.content }}</p>
@@ -7,7 +7,7 @@
         <p v-else>
             {{ items.content }}
         </p> -->
-        <filp :contents="items"></filp>
+        <filp :contents="items" :title="title"></filp>
     </div>
 </template>
 
@@ -20,21 +20,38 @@
         },
         data () {
             return {
-                items: []
+                items: [],
+                title: ''
             }
         },
         methods: {
             init (id) {
+                let fonts = 300;
                 ajaxQuery('getAritcle', {art_id: id}, res => {
                     res.data.content = JSON.parse(decodeURIComponent(res.data.content))
+
+                    console.log(JSON.parse(JSON.stringify(res.data)));
+
                     document.title = res.data.title;
+                    this.title = res.data.title;
                     let tempArr = res.data.content, lastArr;
-                    lastArr = tempArr.splice(0, (tempArr.length - tempArr.length % 19))
-                    while (lastArr.length) {
-                        this.items.push(lastArr.splice(0, 19));
+                    let sum = 0, temp = [];
+                    for (var i = 0; i < tempArr.length; i++) {
+                        var _item = tempArr[i] ;
+                        sum += _item.content.toString().length;
+                        temp.push(_item)
+                        if (sum > fonts) {
+                            this.items.push(temp);
+                            sum = 0;
+                            temp = [];
+                            continue;
+                        }
                     }
-                    this.items[0].title = res.data.title;
-                    this.items.push(tempArr);
+                    // lastArr = tempArr.splice(0, (tempArr.length - tempArr.length % 19))
+                    // while (lastArr.length) {
+                    //     this.items.push(lastArr.splice(0, 19));
+                    // }
+                    // this.items.push(tempArr);
                     console.log(JSON.parse(JSON.stringify(this.items)));
                 })
             },

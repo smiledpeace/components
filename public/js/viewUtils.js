@@ -92,9 +92,9 @@ const utils = {
                 ,
             hh: date.getHours() //时
                 ,
-            mm: date.getMinutes() //分
+            mm: paddNum(date.getMinutes()) //分
                 ,
-            ss: date.getSeconds() //秒
+            ss: paddNum(date.getSeconds()) //秒
         }
         format || (format = "yyyy-MM-dd hh:mm:ss");
         return format.replace(/([a-z])(\1)*/ig, function(m) {

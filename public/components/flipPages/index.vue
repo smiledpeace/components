@@ -1,7 +1,7 @@
 <template lang="html">
     <div class="yui-filp" ref="flip" v-scroll @touchstart="startFun" @touchmove="moveFun" @touchend="endFun">
         <div class="page" v-for="(item, index) in contents">
-            <h3 v-if="item.title"></h3>
+            <h3 class="title" v-if="index === 0">{{ title }}</h3>
             <p v-for="content in item">{{ content.content }}</p>
         </div>
         <!-- <div class="page one" >
@@ -61,7 +61,8 @@
             }
         },
         props: {
-            contents: Array
+            contents: Array,
+            title: String
         },
         methods: {
             checkClassName(el, className, forAdd = true) {
@@ -87,6 +88,7 @@
             },
             addClass(el, className) {
                 el.classList.add(className);
+                // this.endDistanceY = 0;
             },
             moveFun(evt) {
                 let touches = evt.touches[0];
@@ -108,6 +110,7 @@
                 }
             },
             endFun(evt) {
+                console.log();
                 if (this.endDistanceY) {
                     // if (this.$refs.flip.__TimerManager__ || this.$refs.flip.__TimerManager__.constructor === TimerManager) {
                     //     this.$refs.flip.__TimerManager__.next();

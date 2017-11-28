@@ -1,5 +1,5 @@
-const ajaxQuery = function(method, params, sucCB, unsucCB) {
-    let noLoading = params.noLoading,
+var ajaxQuery = function(method, params, sucCB, unsucCB) {
+    var noLoading = params.noLoading,
         queryNum = 0;
     if (params.noLoading) {
         delete params.noLoading;
@@ -58,7 +58,7 @@ const ajaxQuery = function(method, params, sucCB, unsucCB) {
  * @param obj
  * @returns {{}}
  */
-const objectDepthCopy = function(obj) {
+var objectDepthCopy = function(obj) {
     var temp = null;
     if (obj && !(obj instanceof Array)) {
         temp = {};

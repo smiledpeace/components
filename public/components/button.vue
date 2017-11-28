@@ -4,7 +4,7 @@
     </button>
 </template>
 <script>
-    const prefix = 'yui';
+    var prefix = 'yui';
     export default {
         mounted() {
         },
