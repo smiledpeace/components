@@ -2,8 +2,6 @@
 学习开发实用组件，目前的组件库
 
 ## Docs
-
--[slide-wrap](public/components/slide-wrap/slide-wrap.vue)
 -[loading](public/components/loading/)
 
 ...
