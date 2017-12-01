@@ -1,10 +1,10 @@
-#components
+# components
 学习开发实用组件，目前的组件库
 
-##Docs
+## Docs
 
--[slide-wrap](components/slide-wrap/slide-wrap.vue)
--[loading](components/loading/)
+-[slide-wrap](public/components/slide-wrap/slide-wrap.vue)
+-[loading](public/components/loading/)
 
 ...
 
