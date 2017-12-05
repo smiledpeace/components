@@ -6,6 +6,10 @@
             </ul>
 
         </div> -->
+        <div style="margin:100px auto; width: 100px;">
+            
+        <y-toggle></y-toggle>
+        </div>
         <button type="button" name="button" class="yui-button" @click="goFilp">Go To Filp</button>
         <ul class="editor_ul">
             <li v-for="item in notes"><a href="javascript:;" @click="saveData(item)">{{ item.title }}</a></li>

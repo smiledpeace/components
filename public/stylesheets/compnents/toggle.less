@@ -1,0 +1,38 @@
+@toggle-prefix: ~'@{css-prefix}-toggle';
+
+.@{toggle-prefix} {
+	overflow: hidden;
+	display: inline-block;
+	cursor: pointer;
+	&-input {
+		display: none;
+	}
+	&-path {
+		width: 51px;
+		height: 31px;
+		border-radius: 20px;
+		pointer-events: none;
+		border: 2px solid;
+		display: inline-block;
+		box-sizing: border-box;
+		transition: all .3s ease;
+		background-color: #fff;
+		border-color: #e6e6e6;
+		
+		&.checked {
+			border-color: #4c0;
+			background-color: #4c0;
+		}
+	}
+	&-dot {
+		width: 27px;
+		height: 27px;
+		border-radius: 100%;
+		background-color: #fff;
+		box-shadow: 0 2px 7px rgba(0,0,0,.35), 0 1px 1px rgba(0,0,0,.15);
+		transition: transform .3s ease;
+		&.checked {
+			transform: translate3d(20px, 0, 0);
+		}
+	}
+}

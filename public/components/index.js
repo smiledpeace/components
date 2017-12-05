@@ -3,6 +3,7 @@ import Button from './button.vue';
 import Message from  './message';
 import Upload from './uploadFile.vue';
 import Radio from './radio';
+import Toggle from './toggle';
 
 import Loading from './loading';
 
@@ -17,6 +18,7 @@ const YUI = {
     YRadios: Radio.Group,
     YSelect: Select,
     YOption: Option,
+    YToggle: Toggle,
     // YLoading: Loading
 };
 
