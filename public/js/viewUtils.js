@@ -336,5 +336,23 @@ const utils = {
 
         return obj;
     },
+    queryData: function(params, sucCB, unsucCB, errCB) {
+        let url = 'https://api.imjad.cn/cloudmusic/?'
+        url = url + params;
+        Vue.http.get(url, params).then((res) => {
+            let resultJson;
+            try {
+                resultJson = JSON.parse(res.data);
+            } catch (e) {
+                resultJson = res.data;
+            }
+            sucCB(resultJson);
+        }, (res) => {
+            if (errCB && typeof errCB === 'function') {
+                errCB();
+            }
+            utils.unSucess('操作超时，请重试或刷新页面！');
+        });
+    };
 }
 export default utils;

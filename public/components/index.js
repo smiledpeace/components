@@ -6,7 +6,8 @@ import Radio from './radio';
 import Toggle from './toggle';
 
 import Loading from './loading';
-
+import preview          from '../preview/index.js';
+import confirm          from '../comfirm/index.js';
 import {Select, Option} from './select';
 
 
@@ -28,6 +29,9 @@ const install = Vue => {
     });
     Vue.prototype.$Message = Message;
     Vue.prototype.$Loading = Loading;
+    Vue.prototype.$preview = preview; // 可传img对象 和 文件 url
+    
+    Vue.prototype.$confirm = confirm; // 可自定以宽高 {width: 300, height: 150}
 };
 
 module.exports = Object.assign(YUI, {install});

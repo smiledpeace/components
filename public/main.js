@@ -8,6 +8,9 @@ import register from './views/register.vue';
 import login from './views/login.vue';
 import aritcle from './views/content.vue';
 import filp from './views/filp.vue';
+
+import vueUtil from '..js/vueUtil';
+vue.use(vueUtil);
 new Vue({
     el: '#app',
     data: {
