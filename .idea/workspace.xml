@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="16c59010-d440-42fb-bd1b-c6b79f96332b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/libs/openType.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/query.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/query.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/index.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,7 +161,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="16.14.2" />
     <property name="javascript.nodejs.core.library.typings.version" value="16.11.47" />
-    <property name="last_opened_file_path" value="F:/lite" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -210,6 +206,7 @@
       <workItem from="1503565876812" duration="1141000" />
       <workItem from="1504495556255" duration="22000" />
       <workItem from="1659924277423" duration="12825000" />
+      <workItem from="1660010583160" duration="26000" />
     </task>
     <servers />
   </component>
@@ -261,9 +258,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/libs/mongodb.js">

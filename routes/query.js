@@ -15,7 +15,7 @@ var cheerio = require('cheerio')
 var eventproxy = require('eventproxy')
 var ep = new eventproxy()
 // var pageUrl = 'http://gov.sina.com.cn/';
-var pageUrl = 'https://i.jzj9999.com/quoteh5' || 'http://www.bxwx9.org/b/24/24675/index.html'
+var pageUrl = 'http://www.bxwx9.org/b/24/24675/index.html'
 
 require('../libs/mongodb')
 var fs = require('fs')
